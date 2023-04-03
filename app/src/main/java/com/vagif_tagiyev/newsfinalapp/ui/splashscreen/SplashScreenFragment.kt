@@ -13,7 +13,7 @@ class SplashScreenFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         val splashBinding = FragmentSplashScreenBinding.inflate(layoutInflater,container,false)
 
         return splashBinding.root
