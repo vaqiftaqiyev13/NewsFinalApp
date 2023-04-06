@@ -1,5 +1,8 @@
 <resources>
-    <string name="app_name">NewsFinalApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="app_name">Xəbərçi</string>
+    <string name="welcome_text">Xoş Gəldin!</string>
+    <string name="first_screen_description">
+        Salam, dəyərli istifadəçi! Proqramımızda səni görməyə şad olduq.
+    </string>
+    <string name="novbeti">Növbəti</string>
 </resources>
