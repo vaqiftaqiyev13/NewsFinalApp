@@ -1,5 +1,6 @@
 package com.vagif_tagiyev.newsfinalapp.ui.splashscreen
 
+import android.content.Context
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -22,7 +23,11 @@ class SplashScreenFragment : Fragment() {
 
         scope.launch {
             delay(3000L)
-            splashToViewPager()
+            if (onBoardingFinished()) {
+                splashToHome()
+            } else {
+                splashToViewPager()
+            }
         }
 
         return splashBinding.root
@@ -32,5 +37,18 @@ class SplashScreenFragment : Fragment() {
         val action = SplashScreenFragmentDirections.splashViewpagerScreen()
         findNavController().navigate(action)
     }
+
+    private fun onBoardingFinished(): Boolean {
+        val sharedPreferences =
+            requireActivity().getSharedPreferences("onBoarding", Context.MODE_PRIVATE)
+        return sharedPreferences.getBoolean("Finish", false)
+
+    }
+
+    private fun splashToHome() {
+        val action = SplashScreenFragmentDirections.splashToHome()
+        findNavController().navigate(action)
+    }
+
 
 }

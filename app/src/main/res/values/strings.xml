@@ -7,4 +7,10 @@
     <string name="novbeti">Növbəti</string>
     <string name="second_highlight">Bütün xəbərlər bir app-də</string>
     <string name="second_description">Bütün dünya xəbərləri sənin əlinin altında olacaq</string>
+    <string name="third_highlight">Başlayaq!</string>
+    <string name="third_description">Proqramımızla tanış olduğunuza görə artıq proqramı işə sala bilərik.</string>
+    <string name="bitdi">Bitdi</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
