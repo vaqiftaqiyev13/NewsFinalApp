@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.navigation.ui.setupWithNavController
 import com.vagif_tagiyev.newsfinalapp.databinding.FragmentHomeBinding
 
 class HomeFragment : Fragment() {
@@ -14,8 +16,6 @@ class HomeFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         val homeBinding = FragmentHomeBinding.inflate(layoutInflater, container, false)
-
-
         return homeBinding.root
     }
 
