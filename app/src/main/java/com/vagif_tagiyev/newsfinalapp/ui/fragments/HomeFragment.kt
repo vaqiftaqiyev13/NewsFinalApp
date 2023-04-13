@@ -1,4 +1,4 @@
-package com.vagif_tagiyev.newsfinalapp
+package com.vagif_tagiyev.newsfinalapp.ui.fragments
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

@@ -1,7 +1,8 @@
-package com.vagif_tagiyev.newsfinalapp
+package com.vagif_tagiyev.newsfinalapp.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.vagif_tagiyev.newsfinalapp.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
