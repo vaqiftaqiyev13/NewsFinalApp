@@ -1,4 +1,4 @@
-package com.vagif_tagiyev.newsfinalapp.api
+package com.vagif_tagiyev.newsfinalapp.model
 
 data class XeberchiResponse(
     val articles: List<Article>,

@@ -1,5 +1,6 @@
 package com.vagif_tagiyev.newsfinalapp.api
 
+import com.vagif_tagiyev.newsfinalapp.model.XeberchiResponse
 import com.vagif_tagiyev.newsfinalapp.util.Constant.API_KEY
 import retrofit2.Response
 import retrofit2.http.GET
