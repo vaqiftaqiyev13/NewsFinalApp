@@ -34,7 +34,7 @@ class NewsFragment : Fragment() {
         newsBinding = FragmentNewsBinding.inflate(layoutInflater,container,false)
 
         newsModel = (requireActivity() as MainActivity).newsModel
-        settingsRecyclerView()
+        newsRecyclerView()
 
         newsModel.topNews.observe(viewLifecycleOwner, Observer { newsResponse ->
             when (newsResponse) {
@@ -62,7 +62,7 @@ class NewsFragment : Fragment() {
 
 
 
-    private fun settingsRecyclerView() {
+    private fun newsRecyclerView() {
         newsAdapter = NewsAdapter()
 
         newsBinding.recyclerRow.apply {
