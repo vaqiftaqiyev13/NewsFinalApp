@@ -7,7 +7,7 @@ import com.vagif_tagiyev.newsfinalapp.model.Article
 @Dao
 interface NewsDAO {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun updateNews(newsArticle: Article)
+    suspend fun upsert(newsArticle: Article) : Long
 
     @Query("SELECT * FROM news")
     fun getAllNews(): LiveData<List<Article>>

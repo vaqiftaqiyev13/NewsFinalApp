@@ -29,7 +29,7 @@
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
-            android:id="@+id/favorites_to_desc"
+            android:id="@+id/favorites__desc"
             app:destination="@id/descriptionFragment" />
     </fragment>
     <fragment

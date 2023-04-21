@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.webkit.WebChromeClient
 import android.webkit.WebViewClient
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.snackbar.Snackbar
 import com.vagif_tagiyev.newsfinalapp.R
 import com.vagif_tagiyev.newsfinalapp.databinding.FragmentDescriptionBinding
 import com.vagif_tagiyev.newsfinalapp.ui.MainActivity
@@ -30,6 +31,13 @@ class DescriptionFragment : Fragment() {
         descBinding.newsWebView.apply {
             webViewClient = WebViewClient()
             loadUrl(articleArg.url)
+        }
+
+
+        descBinding.favFab.setOnClickListener {
+            descModel.saveNews(articleArg)
+            Snackbar.make(it,"Xəbər favoritlərə əlavə olundu.",Snackbar.LENGTH_SHORT).show()
+
         }
         return descBinding.root
     }
