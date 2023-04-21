@@ -30,7 +30,7 @@ class DescriptionFragment : Fragment() {
 
         descBinding.newsWebView.apply {
             webViewClient = WebViewClient()
-            loadUrl(articleArg.url)
+            loadUrl(articleArg.url.toString())
         }
 
 

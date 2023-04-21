@@ -6,11 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AbsListView
 import androidx.core.os.bundleOf
+import androidx.core.view.setPadding
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.vagif_tagiyev.newsfinalapp.R
 import com.vagif_tagiyev.newsfinalapp.databinding.FragmentSearchBinding
 import com.vagif_tagiyev.newsfinalapp.model.Article
@@ -42,7 +45,7 @@ class SearchFragment : Fragment() {
 
         searchNewsAdapter.setOnItemClickListener {
             val bundle = bundleOf("article" to it)
-            findNavController().navigate(R.id.search_desc,bundle)
+            findNavController().navigate(R.id.search_desc, bundle)
         }
 
         var searchJob: Job? = null
@@ -65,7 +68,13 @@ class SearchFragment : Fragment() {
                 is NewsResponse.SuccessResponse -> {
                     hideProgressBar()
                     newsResponse.data?.let {
-                        searchNewsAdapter.differList.submitList(it.articles)
+                        searchNewsAdapter.differList.submitList(it.articles.toList())
+                        val totalPage = it.totalResults / 20 + 2
+                        isLastPage = searchModel.topNewsPage == totalPage
+
+                        if (isLastPage){
+                            searchBinding.SearchAdapter.setPadding(0,0,0,0)
+                        }
                     }
                 }
 
@@ -84,9 +93,44 @@ class SearchFragment : Fragment() {
 
 
 
-
         return searchBinding.root
     }
+
+    var isLoading = false
+    var isLastPage = false
+    var isScrolling = false
+
+    val scrollListener = object : RecyclerView.OnScrollListener() {
+        override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+            super.onScrolled(recyclerView, dx, dy)
+
+            val layoutManager = recyclerView.layoutManager as LinearLayoutManager
+            val firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition()
+            val visibleItemCount = layoutManager.childCount
+            val totalItemCount = layoutManager.itemCount
+
+            val isNotLoadingAndNotLastPage = !isLoading && !isLastPage
+            val isAtLastItem = firstVisibleItemPosition + visibleItemCount >= totalItemCount
+            val isNotAtBeginning = firstVisibleItemPosition >= 0
+            val isTotalMoreThanVisible = totalItemCount >= 20
+            val shouldPaginate = isNotLoadingAndNotLastPage && isAtLastItem && isNotAtBeginning &&
+                    isTotalMoreThanVisible && isScrolling
+            if (shouldPaginate) {
+                searchModel.searchNews(searchBinding.searchView.text.toString())
+                isScrolling = false
+            } else {
+                searchBinding.SearchAdapter.setPadding(0, 0, 0, 0)
+            }
+        }
+
+        override fun onScrollStateChanged(recyclerView: RecyclerView, newState: Int) {
+            super.onScrollStateChanged(recyclerView, newState)
+            if (newState == AbsListView.OnScrollListener.SCROLL_STATE_TOUCH_SCROLL) {
+                isScrolling = true
+            }
+        }
+    }
+
 
     private fun searchRecyclerView() {
         searchNewsAdapter = NewsAdapter()
@@ -94,16 +138,20 @@ class SearchFragment : Fragment() {
         searchBinding.SearchAdapter.apply {
             searchBinding.SearchAdapter.adapter = searchNewsAdapter
             layoutManager = LinearLayoutManager(activity)
+            addOnScrollListener(this@SearchFragment.scrollListener)
+
 
         }
     }
 
     private fun hideProgressBar() {
         searchBinding.searchProgressBar.visibility = View.INVISIBLE
+        isLastPage = false
     }
 
     private fun showProgressBar() {
         searchBinding.searchProgressBar.visibility = View.VISIBLE
+        isLoading = true
     }
 
 }

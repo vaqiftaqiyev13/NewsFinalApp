@@ -13,9 +13,11 @@ import retrofit2.Response
 class NewsViewModel(val newsRepository: NewsRepository) : ViewModel() {
     val topNews: MutableLiveData<NewsResponse<XeberchiResponse>> = MutableLiveData()
     var topNewsPage = 1
+    var newsRespo: XeberchiResponse? = null
 
     val searchNews: MutableLiveData<NewsResponse<XeberchiResponse>> = MutableLiveData()
     var searchNewsPage = 1
+    var searchResponse: XeberchiResponse? = null
 
     init {
         getAllNews("us")
@@ -23,33 +25,51 @@ class NewsViewModel(val newsRepository: NewsRepository) : ViewModel() {
 
     fun getAllNews(countryCode: String) = viewModelScope.launch {
         topNews.postValue(NewsResponse.LoadResponse())
-        val response = newsRepository.getAllNews(countryCode,topNewsPage)
+        val response = newsRepository.getAllNews(countryCode, topNewsPage)
         topNews.postValue(handleNewsResponse(response))
     }
 
     fun searchNews(searchQuery: String) = viewModelScope.launch {
         searchNews.postValue(NewsResponse.LoadResponse())
-        val response = newsRepository.searchNews(searchQuery,topNewsPage)
+        val response = newsRepository.searchNews(searchQuery, topNewsPage)
         searchNews.postValue(handleNewsResponse(response))
     }
 
-    private fun handleNewsResponse(newsResponse: Response<XeberchiResponse>) : NewsResponse<XeberchiResponse>{
-        if (newsResponse.isSuccessful){
+    private fun handleNewsResponse(newsResponse: Response<XeberchiResponse>): NewsResponse<XeberchiResponse> {
+        if (newsResponse.isSuccessful) {
             newsResponse.body()?.let {
-                return NewsResponse.SuccessResponse(it)
+                topNewsPage++
+                if (newsRespo == null) {
+                    newsRespo = it
+                } else {
+                    val oldNews = newsRespo?.articles
+                    val newNews = it.articles
+                    oldNews?.addAll(newNews)
+                }
+
+                return NewsResponse.SuccessResponse(newsRespo ?: it)
             }
         }
-        return  NewsResponse.ErrorResponse(newsResponse.message())
+        return NewsResponse.ErrorResponse(newsResponse.message())
     }
 
 
-    private fun handleSearchResponse(newsResponse: Response<XeberchiResponse>) : NewsResponse<XeberchiResponse>{
-        if (newsResponse.isSuccessful){
+    private fun handleSearchResponse(newsResponse: Response<XeberchiResponse>): NewsResponse<XeberchiResponse> {
+        if (newsResponse.isSuccessful) {
             newsResponse.body()?.let {
-                return NewsResponse.SuccessResponse(it)
+                searchNewsPage++
+                if (searchResponse == null) {
+                    searchResponse = it
+                } else {
+                    val oldNews = searchResponse?.articles
+                    val newNews = it.articles
+                    oldNews?.addAll(newNews)
+                }
+
+                return NewsResponse.SuccessResponse(searchResponse ?: it)
             }
         }
-        return  NewsResponse.ErrorResponse(newsResponse.message())
+        return NewsResponse.ErrorResponse(newsResponse.message())
     }
 
     fun saveNews(article: Article) = viewModelScope.launch {
