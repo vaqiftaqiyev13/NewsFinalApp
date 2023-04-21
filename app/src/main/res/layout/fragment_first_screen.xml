@@ -40,6 +40,8 @@
         android:text="@string/first_screen_description"
         android:textColor="#706f6f"
         android:textSize="18sp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:textStyle="normal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

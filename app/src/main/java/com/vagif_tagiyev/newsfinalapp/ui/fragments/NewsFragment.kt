@@ -43,18 +43,21 @@ class NewsFragment : Fragment() {
         newsModel.topNews.observe(viewLifecycleOwner, Observer { newsResponse ->
             when (newsResponse) {
                 is NewsResponse.SuccessResponse -> {
+                    hideProgressBar()
                     newsResponse.data?.let {
                         newsAdapter.differList.submitList(it.articles)
                     }
                 }
 
                 is NewsResponse.ErrorResponse -> {
+                    hideProgressBar()
                     newsResponse.message?.let {
                         Log.e(newsTag,"Error: $it")
                     }
                 }
 
                 is NewsResponse.LoadResponse -> {
+                    showProgressBar()
                 }
             }
         })
@@ -63,7 +66,13 @@ class NewsFragment : Fragment() {
         return  newsBinding.root
     }
 
+    private fun hideProgressBar() {
+        newsBinding.newsProgressBar.visibility = View.INVISIBLE
+    }
 
+    private fun showProgressBar() {
+        newsBinding.newsProgressBar.visibility = View.VISIBLE
+    }
 
 
     private fun newsRecyclerView() {
