@@ -11,21 +11,25 @@
         android:label="fragment_news"
         tools:layout="@layout/fragment_news" >
         <action
-            android:id="@+id/action_newsFragment_to_descriptionFragment"
+            android:id="@+id/news_desc"
             app:destination="@id/descriptionFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
         android:name="com.vagif_tagiyev.newsfinalapp.ui.fragments.DescriptionFragment"
         android:label="fragment_description"
-        tools:layout="@layout/fragment_description" />
+        tools:layout="@layout/fragment_description" >
+        <argument
+            android:name="article"
+            app:argType="com.vagif_tagiyev.newsfinalapp.model.Article" />
+    </fragment>
     <fragment
         android:id="@+id/favoritesFragment"
         android:name="com.vagif_tagiyev.newsfinalapp.ui.fragments.FavoritesFragment"
         android:label="fragment_favorites"
         tools:layout="@layout/fragment_favorites" >
         <action
-            android:id="@+id/action_favoritesFragment_to_descriptionFragment"
+            android:id="@+id/favorites_to_desc"
             app:destination="@id/descriptionFragment" />
     </fragment>
     <fragment
@@ -34,7 +38,7 @@
         android:label="fragment_search"
         tools:layout="@layout/fragment_search" >
         <action
-            android:id="@+id/action_searchFragment_to_descriptionFragment"
+            android:id="@+id/search_desc"
             app:destination="@id/descriptionFragment" />
     </fragment>
 </navigation>

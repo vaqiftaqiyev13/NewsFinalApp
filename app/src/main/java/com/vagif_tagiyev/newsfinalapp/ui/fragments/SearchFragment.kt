@@ -6,11 +6,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.core.widget.addTextChangedListener
 import androidx.lifecycle.Observer
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.vagif_tagiyev.newsfinalapp.R
 import com.vagif_tagiyev.newsfinalapp.databinding.FragmentSearchBinding
+import com.vagif_tagiyev.newsfinalapp.model.Article
 import com.vagif_tagiyev.newsfinalapp.ui.MainActivity
 import com.vagif_tagiyev.newsfinalapp.ui.adapter.NewsAdapter
 import com.vagif_tagiyev.newsfinalapp.ui.viewmodel.NewsViewModel
@@ -36,14 +39,20 @@ class SearchFragment : Fragment() {
         searchModel = (requireActivity() as MainActivity).newsModel
         searchRecyclerView()
 
-        var searchJob : Job? = null
+
+        searchNewsAdapter.setOnItemClickListener {
+            val bundle = bundleOf("article" to it)
+            findNavController().navigate(R.id.search_desc,bundle)
+        }
+
+        var searchJob: Job? = null
 
         searchBinding.searchView.addTextChangedListener {
             searchJob?.cancel()
             searchJob = MainScope().launch {
                 delay(300L)
                 it?.let {
-                    if (it.toString().isNotEmpty()){
+                    if (it.toString().isNotEmpty()) {
                         searchModel.searchNews(it.toString())
                     }
                 }
@@ -89,11 +98,11 @@ class SearchFragment : Fragment() {
         }
     }
 
-    private fun hideProgressBar(){
+    private fun hideProgressBar() {
         searchBinding.searchProgressBar.visibility = View.INVISIBLE
     }
 
-    private fun showProgressBar(){
+    private fun showProgressBar() {
         searchBinding.searchProgressBar.visibility = View.VISIBLE
     }
 

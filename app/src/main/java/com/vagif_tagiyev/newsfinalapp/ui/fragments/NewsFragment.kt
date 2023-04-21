@@ -6,12 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.navigation.fragment.findNavController
-import androidx.navigation.ui.setupWithNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.vagif_tagiyev.newsfinalapp.R
 import com.vagif_tagiyev.newsfinalapp.databinding.FragmentNewsBinding
 import com.vagif_tagiyev.newsfinalapp.ui.MainActivity
@@ -21,7 +19,7 @@ import com.vagif_tagiyev.newsfinalapp.util.NewsResponse
 
 class NewsFragment : Fragment() {
     lateinit var newsBinding: FragmentNewsBinding
-    val NewsTag = "NewsFragment"
+    val newsTag = "NewsFragment"
 
     lateinit var newsModel: NewsViewModel
 
@@ -35,6 +33,12 @@ class NewsFragment : Fragment() {
 
         newsModel = (requireActivity() as MainActivity).newsModel
         newsRecyclerView()
+        newsAdapter.setOnItemClickListener {
+            val bundle = bundleOf("article" to it)
+            findNavController().navigate(R.id.news_desc,bundle)
+        }
+
+
 
         newsModel.topNews.observe(viewLifecycleOwner, Observer { newsResponse ->
             when (newsResponse) {
@@ -46,7 +50,7 @@ class NewsFragment : Fragment() {
 
                 is NewsResponse.ErrorResponse -> {
                     newsResponse.message?.let {
-                        Log.e(NewsTag,"Error: $it")
+                        Log.e(newsTag,"Error: $it")
                     }
                 }
 
@@ -72,4 +76,5 @@ class NewsFragment : Fragment() {
 
         }
     }
+
 }
