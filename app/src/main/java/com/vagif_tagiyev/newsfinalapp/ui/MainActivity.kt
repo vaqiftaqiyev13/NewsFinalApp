@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val newsRepository = NewsRepository(NewsDatabase(this))
-        val newsModelProviderFactory = NewsProvider(newsRepository)
+        val newsModelProviderFactory = NewsProvider(application,newsRepository)
         newsModel = ViewModelProvider(this,newsModelProviderFactory)[NewsViewModel ::class.java]
         supportActionBar?.hide()
     }

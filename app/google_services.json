@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "191845575240",
+    "project_id": "newsapp-dcf65",
+    "storage_bucket": "newsapp-dcf65.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:191845575240:android:cc78bd27fcb538498dc67d",
+        "android_client_info": {
+          "package_name": "com.vagif_tagiyev.newsfinalapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "191845575240-kg73nfug8d4m1jjqf15ghf2neduu9bvd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCunoIrqUQAWKZyxJrZFENa2RhcyvoJ8ns"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "191845575240-kg73nfug8d4m1jjqf15ghf2neduu9bvd.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
