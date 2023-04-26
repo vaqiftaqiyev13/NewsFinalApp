@@ -10,7 +10,7 @@ import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.vagif_tagiyev.newsfinalapp.XeberchiApplication
+import com.vagif_tagiyev.newsfinalapp.application.XeberchiApplication
 import com.vagif_tagiyev.newsfinalapp.model.Article
 import com.vagif_tagiyev.newsfinalapp.model.XeberchiResponse
 import com.vagif_tagiyev.newsfinalapp.repository.NewsRepository

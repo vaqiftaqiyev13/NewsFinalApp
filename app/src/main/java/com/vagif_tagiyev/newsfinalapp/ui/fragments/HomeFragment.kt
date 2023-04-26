@@ -21,7 +21,6 @@ import com.vagif_tagiyev.newsfinalapp.ui.viewmodel.NewsViewModel
 
 
 class HomeFragment : Fragment() {
-    //lateinit var newsModel : NewsViewModel
     lateinit var homeBinding: FragmentHomeBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -18,5 +18,6 @@
     <string name="favorites">Favorites</string>
     <string name="axtar">Axtar...</string>
     <string name="save_to_favorites">Save to Favorites</string>
+    <string name="account">Account</string>
 
 </resources>

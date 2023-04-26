@@ -13,6 +13,9 @@
         <action
             android:id="@+id/news_desc"
             app:destination="@id/descriptionFragment" />
+        <action
+            android:id="@+id/news_login"
+            app:destination="@id/loginFragment" />
     </fragment>
     <fragment
         android:id="@+id/descriptionFragment"
@@ -41,4 +44,9 @@
             android:id="@+id/search_desc"
             app:destination="@id/descriptionFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.vagif_tagiyev.newsfinalapp.ui.fragments.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>
