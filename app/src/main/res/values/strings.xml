@@ -19,5 +19,8 @@
     <string name="axtar">Axtar...</string>
     <string name="save_to_favorites">Save to Favorites</string>
     <string name="account">Account</string>
+    <string name="e_mail">E-mail</string>
+    <string name="password">Password</string>
+    <string name="sign_up">Sign Up</string>
 
 </resources>
