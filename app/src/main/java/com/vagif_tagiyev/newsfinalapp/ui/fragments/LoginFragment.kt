@@ -47,6 +47,8 @@ class LoginFragment : Fragment() {
                 auth.createUserWithEmailAndPassword(email, password).addOnSuccessListener {
                     val logAcc = LoginFragmentDirections.loginAccount(email,password)
                     findNavController().navigate(logAcc)
+
+
                 }.addOnFailureListener{
                     Toast.makeText(context,it.localizedMessage ,Toast.LENGTH_LONG).show()
                 }
